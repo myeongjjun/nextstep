@@ -13,3 +13,6 @@ cache:
 
 # clean 후 Build
 script: "./gradlew clean build"
+
+after_success:
+  - './gradlew jacocoTestReport coverallsJacoco'
