@@ -1,0 +1,15 @@
+language: java
+jdk:
+  - openjdk11
+branches:
+  only:
+    - main
+
+# Travic CI 서버 Cache 활성화
+cache:
+  directories:
+    - '$HOME/.m2/repository'
+    - '$HOME/.gradle'
+
+# clean 후 Build
+script: "./gradlew clean build"
