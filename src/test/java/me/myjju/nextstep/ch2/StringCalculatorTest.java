@@ -26,19 +26,33 @@ class StringCalculatorTest {
     }
 
     @Test
-    void sumTest() {
-//        assertThat(calculator.add("3")).isEqualTo(3);
+    void add_숫자하나() {
+        assertThat(calculator.add("3")).isEqualTo(3);
+    }
+
+    @Test
+    void add_쉼표구분자() {
         assertThat(calculator.add("1,2")).isEqualTo(3);
         assertThat(calculator.add("1,2,3")).isEqualTo(6);
+    }
+
+    @Test
+    void add_쉼표_또는_콜론_구분자() {
         assertThat(calculator.add("1,2:3")).isEqualTo(6);
+    }
+
+    @Test
+    void add_custom_구분자() {
 
         assertThat(calculator.add("//;\n1;2;3")).isEqualTo(6);
         assertThat(calculator.add("//*\n1*2*3")).isEqualTo(6);
         assertThat(calculator.add("//*\n1*2#3")).isEqualTo(0);
+    }
 
+    @Test
+    void sumTest() {
         assertThatThrownBy(() -> calculator.add("1,-1")).isInstanceOf(RuntimeException.class);
         assertThatThrownBy(() ->calculator.add("//;\n1;-1;8")).isInstanceOf(RuntimeException.class);
-
     }
 
 

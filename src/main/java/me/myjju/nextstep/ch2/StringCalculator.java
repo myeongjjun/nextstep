@@ -13,14 +13,23 @@ public class StringCalculator {
 
     public int add(String input) throws RuntimeException {
 
+        if (input == null || input.isEmpty()) {
+            return 0;
+        }
+
+        try {
+            return Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+
+        }
+
         Matcher matcher = CUSTOM_STRING_PATTERN.matcher(input);
-        if (!matcher.find() || input.length() < 3) {
+        if (!matcher.find()) {
             return 0;
         }
 
         String separator = getSeparator(matcher);
         String data = matcher.group(2);
-
 
         int result = 0;
         try {
