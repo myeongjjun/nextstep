@@ -1,7 +1,5 @@
 package me.myjju.nextstep.ch2;
 
-import org.springframework.util.StringUtils;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -27,12 +25,7 @@ public class StringCalculator {
         }
 
         // 입력값 구분자, 합계 처리
-        try {
-            return operate(toIntegerList(input));
-        } catch (NumberFormatException e) { // 구분된 문자열이 숫자가 아닌경우
-        }
-
-        return 0;
+        return operate(toIntegerList(input));
     }
 
     private boolean isBlank(String input) {
@@ -56,13 +49,16 @@ public class StringCalculator {
 
     private List<Integer> toIntegerList(String input) {
         Matcher matcher = CUSTOM_STRING_PATTERN.matcher(input);
-        if (matcher.find()) {
-            String separator = getSeparator(matcher);
-            String data = matcher.group(2);
-            String[] split = data.split(separator);
-            return Arrays.stream(split)
-                    .map(this::parseUnsignedInt)
-                    .collect(Collectors.toList());
+        try {
+            if (matcher.find()) {
+                String separator = getSeparator(matcher);
+                String data = matcher.group(2);
+                String[] split = data.split(separator);
+                return Arrays.stream(split)
+                        .map(this::parseUnsignedInt)
+                        .collect(Collectors.toList());
+            }
+        } catch (NumberFormatException e) { // 구분된 문자열이 숫자가 아닌경우
         }
         return Collections.emptyList();
     }
