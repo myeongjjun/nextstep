@@ -54,7 +54,7 @@ public class StringCalculator {
     }
 
 
-스    private List<Integer> toIntegerList(String input) {
+    private List<Integer> toIntegerList(String input) {
         Matcher matcher = CUSTOM_STRING_PATTERN.matcher(input);
         if (matcher.find()) {
             String separator = getSeparator(matcher);
