@@ -54,13 +54,14 @@ public class StringCalculator {
     }
 
 
-    public List<Integer> toIntegerList(String input) {
+스    private List<Integer> toIntegerList(String input) {
         Matcher matcher = CUSTOM_STRING_PATTERN.matcher(input);
         if (matcher.find()) {
             String separator = getSeparator(matcher);
             String data = matcher.group(2);
             String[] split = data.split(separator);
-            return Arrays.stream(split).map(this::parseUnsignedInt)
+            return Arrays.stream(split)
+                    .map(this::parseUnsignedInt)
                     .collect(Collectors.toList());
         }
         return Collections.emptyList();
@@ -74,7 +75,9 @@ public class StringCalculator {
         return i;
     }
 
-    public int operate(List<Integer> lists) {
-        return lists.stream().mapToInt(Integer::intValue).sum();
+    private int operate(List<Integer> lists) {
+        return lists.stream()
+                .mapToInt(Integer::intValue)
+                .sum();
     }
 }

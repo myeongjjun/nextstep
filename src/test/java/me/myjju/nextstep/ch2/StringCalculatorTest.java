@@ -61,8 +61,12 @@ class StringCalculatorTest {
 
     @Test
     void 알수없는_구분자_0처리() {
-
         assertThat(calculator.add("//*\n1*2#3")).isEqualTo(0);
+    }
+
+    @Test
+    void 구분자_처리부분만_존재하는경우_0처리() {
+        assertThat(calculator.add("//*\n")).isEqualTo(0);
     }
 
     @Test
